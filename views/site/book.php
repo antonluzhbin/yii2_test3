@@ -70,7 +70,7 @@ $this->title = 'Книги';
                 <a class='icon icon-eye-open' href='javascript:void(0);' onclick='showbook(<?php echo $book->id ?>); return false;'></a>
             </td>
             <td>
-                <?php echo Html::a(NULL, array('site/deletebook', 'id'=>$book->id), array('class'=>'icon icon-trash')); ?>
+                <?php echo Html::a(NULL, array('site/deletebook', 'id'=>$book->id, 'filter' => $filterstr, 'sort' => $sort, 'order' => $order), array('class'=>'icon icon-trash')); ?>
             </td>
         </tr>
     <?php endforeach; ?>

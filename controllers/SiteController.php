@@ -176,7 +176,7 @@ class SiteController extends Controller
         ));
     }
     
-    public function actionDeletebook($id=NULL)
+    public function actionDeletebook($id = NULL, $sort = null, $order = null, $filter = null)
     {
         if (\Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -185,7 +185,7 @@ class SiteController extends Controller
         if ($id === NULL)
         {
             Yii::$app->session->setFlash('BookDeletedError');
-            Yii::$app->getResponse()->redirect(array('site/book'));
+            Yii::$app->getResponse()->redirect(array('site/book', 'filter' => $filter, 'sort' => $sort, 'order' => $order));
         }
 
         $book = Book::find()->where(['id' => $id])->one();
@@ -193,12 +193,12 @@ class SiteController extends Controller
         if ($book === NULL)
         {
             Yii::$app->session->setFlash('BookDeletedError');
-            Yii::$app->getResponse()->redirect(array('site/book'));
+            Yii::$app->getResponse()->redirect(array('site/book', 'filter' => $filter, 'sort' => $sort, 'order' => $order));
         }
 
         $book->delete();
 
         Yii::$app->session->setFlash('BookDeleted');
-        Yii::$app->getResponse()->redirect(array('site/book'));
+        Yii::$app->getResponse()->redirect(array('site/book', 'filter' => $filter, 'sort' => $sort, 'order' => $order));
     }
 }
